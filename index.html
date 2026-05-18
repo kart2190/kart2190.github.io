@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Karthik Shankar Raj</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0f14;
+      --surface: #13161d;
+      --surface2: #1a1e28;
+      --border: #1f2433;
+      --accent: #5b8dee;
+      --accent2: #7b6cf6;
+      --green: #3ecf8e;
+      --text: #e2e8f0;
+      --muted: #64748b;
+      --tag-bg: #1a2235;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      height: 60px;
+      background: rgba(13,15,20,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Fira Code', monospace;
+      font-size: 1rem;
+      color: var(--accent);
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-social {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .nav-social a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.2s;
+    }
+
+    .nav-social a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 80px 2.5rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(91,141,238,0.08) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .hero-tag {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.85rem;
+      color: var(--green);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .hero-tag::before {
+      content: '';
+      display: inline-block;
+      width: 28px;
+      height: 2px;
+      background: var(--green);
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      margin-bottom: 1rem;
+    }
+
+    h1 .accent-gradient {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 560px;
+      margin-bottom: 2.5rem;
+      line-height: 1.8;
+    }
+
+    .hero-sub strong { color: var(--text); font-weight: 500; }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.5rem;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border: 1px solid var(--accent);
+    }
+
+    .btn-primary:hover {
+      background: #4a7bde;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(91,141,238,0.3);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 5rem 2.5rem;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .section-num {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.8rem;
+      color: var(--accent);
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .skill-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.4rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .skill-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .skill-card-title {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 0.9rem;
+      font-family: 'Fira Code', monospace;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+
+    .tag {
+      background: var(--tag-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.65rem;
+      border-radius: 5px;
+      font-size: 0.78rem;
+      font-weight: 500;
+    }
+
+    /* ── EXPERIENCE ── */
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      bottom: 8px;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2.8rem;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2rem;
+      top: 8px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--bg);
+      box-shadow: 0 0 0 2px var(--accent);
+    }
+
+    .timeline-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-role {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .timeline-date {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.78rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .timeline-company {
+      font-size: 0.88rem;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 0.9rem;
+    }
+
+    .timeline-body {
+      color: #94a3b8;
+      font-size: 0.9rem;
+    }
+
+    .timeline-body ul {
+      padding-left: 1.2rem;
+    }
+
+    .timeline-body li {
+      margin-bottom: 0.4rem;
+    }
+
+    .timeline-body li strong {
+      color: var(--text);
+    }
+
+    /* ── EDUCATION ── */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .edu-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.6rem;
+      transition: border-color 0.2s;
+    }
+
+    .edu-card:hover { border-color: var(--accent2); }
+
+    .edu-degree {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .edu-school {
+      font-size: 0.85rem;
+      color: var(--accent2);
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .edu-date {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.6rem;
+      transition: border-color 0.2s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .project-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .project-card:hover::before { opacity: 1; }
+
+    .project-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--tag-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+
+    .project-name {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-desc {
+      font-size: 0.88rem;
+      color: #94a3b8;
+      margin-bottom: 1rem;
+      line-height: 1.65;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-family: 'Fira Code', monospace;
+    }
+
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── SCROLL INDICATOR ── */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--muted);
+      font-size: 0.75rem;
+      animation: bob 2s ease-in-out infinite;
+    }
+
+    .scroll-indicator svg { color: var(--muted); }
+
+    @keyframes bob {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      nav { padding: 0 1.25rem; }
+      .nav-links { display: none; }
+      section { padding: 4rem 1.25rem; }
+      #hero { padding: 80px 1.25rem 2.5rem; }
+      .timeline { padding-left: 1.5rem; }
+      .timeline-item::before { left: -1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <span class="nav-logo">ksr.</span>
+    <ul class="nav-links">
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#projects">Projects</a></li>
+    </ul>
+    <div class="nav-social">
+      <a href="https://linkedin.com/in/karthik2190/" target="_blank" rel="noopener">
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://github.com/kart2190" target="_blank" rel="noopener">
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+        GitHub
+      </a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-content">
+      <div class="hero-tag">Available for senior / lead roles</div>
+      <h1>
+        Karthik<br />
+        <span class="accent-gradient">Shankar Raj</span>
+      </h1>
+      <p class="hero-sub">
+        Lead Software Developer with <strong>7+ years</strong> building and scaling
+        <strong>distributed systems</strong> at Autodesk. I architect microservices, lead
+        engineering squads, and ship across the full stack —
+        <strong>Java, TypeScript, Python</strong> on <strong>AWS</strong>.
+      </p>
+      <div class="hero-cta">
+        <a href="#experience" class="btn btn-primary">View Experience</a>
+        <a href="https://linkedin.com/in/karthik2190/" target="_blank" rel="noopener" class="btn btn-ghost">Connect on LinkedIn</a>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Skills</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-card-title">Languages</div>
+        <div class="tag-list">
+          <span class="tag">JavaScript</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">Java</span>
+          <span class="tag">Python</span>
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Frameworks &amp; Tools</div>
+        <div class="tag-list">
+          <span class="tag">ReactJS</span>
+          <span class="tag">NodeJS</span>
+          <span class="tag">SpringBoot</span>
+          <span class="tag">Netflix DGS</span>
+          <span class="tag">ElectronJS</span>
+          <span class="tag">FastAPI</span>
+          <span class="tag">UiPath</span>
+          <span class="tag">GitOps</span>
+          <span class="tag">CI/CD</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Cloud</div>
+        <div class="tag-list">
+          <span class="tag">AWS</span>
+          <span class="tag">Azure</span>
+          <span class="tag">GCP</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Data Stores</div>
+        <div class="tag-list">
+          <span class="tag">SQL</span>
+          <span class="tag">NoSQL</span>
+          <span class="tag">DynamoDB</span>
+          <span class="tag">AWS RDS</span>
+          <span class="tag">InfluxDB</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Experience</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-header">
+          <span class="timeline-role">Lead Software Developer</span>
+          <span class="timeline-date">Jul 2021 — Present</span>
+        </div>
+        <div class="timeline-company">Autodesk</div>
+        <div class="timeline-body">
+          <ul>
+            <li>Ownership of multiple user-critical services spanning monolith and microservice architectures — <strong>scale engineering at core</strong>.</li>
+            <li>Leading a <strong>squad of 12 engineers</strong> across Java (Netflix DGS / GraphQL, SpringBoot), TypeScript (NodeJS), and Python (Automation) on AWS self and managed services.</li>
+            <li>Integrated with multiple authentication and data streaming services.</li>
+            <li>Responsibilities span full-stack development, driving multi-year release cycles, code review, and mentoring.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-header">
+          <span class="timeline-role">Full Stack Cloud Developer</span>
+          <span class="timeline-date">Jan 2020 — Jul 2021</span>
+        </div>
+        <div class="timeline-company">Xennial Innovations &mdash; Bombardier, Altitude Sports, Stay Inc.</div>
+        <div class="timeline-body">
+          <ul>
+            <li>Developed an e-commerce platform from inception using <strong>ReactJS, NodeJS, NextJS, Ruby, Temporal, Prefect, OpenFaaS, AWS</strong> — handling peak load of <strong>370k customers</strong>.</li>
+            <li>Migrated legacy services to serverless, <strong>cutting infrastructure costs by 40%</strong>.</li>
+            <li>Set up best DevOps practices; optimised development and deployments across multiple phases to keep pace with constant user growth.</li>
+            <li>Delivered backend services for additional clients using Java (SpringBoot, React, DynamoDB, AWS RDS, AWS CodePipeline, AWS Lambda).</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-header">
+          <span class="timeline-role">Software Engineer</span>
+          <span class="timeline-date">Jan 2018 — Aug 2019</span>
+        </div>
+        <div class="timeline-company">Cerner Corporation</div>
+        <div class="timeline-body">
+          <ul>
+            <li>Migrated a <strong>C# monolith</strong> to a microservice architecture.</li>
+            <li>Built and maintained a white-label REST API enabling end-to-end <strong>B2B payment processing</strong>.</li>
+            <li>Integrated 3 payment processors with dynamic selection based on defined criteria.</li>
+            <li>Stack: MERN, AWS, GCP, RabbitMQ, TravisCI.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Education</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="edu-degree">Cloud Computing</div>
+        <div class="edu-school">Lambton College</div>
+        <div class="edu-date">May 2021</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-degree">Masters in Computer Applications</div>
+        <div class="edu-school">RV College of Engineering</div>
+        <div class="edu-date">May 2018</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Projects</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-icon">📊</div>
+        <div class="project-name">Metric Visualisation</div>
+        <p class="project-desc">
+          Tracks production metrics and enables real-time optimisation triggers across a microservice architecture.
+          Dockerized various monolith platforms following the <strong>12-factor methodology</strong>.
+        </p>
+        <div class="tag-list">
+          <span class="tag">Node</span>
+          <span class="tag">Ruby</span>
+          <span class="tag">DataDog</span>
+          <span class="tag">InfluxDB</span>
+          <span class="tag">Grafana</span>
+          <span class="tag">AWS</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">🎓</div>
+        <div class="project-name">Student Attendance System</div>
+        <p class="project-desc">
+          Developed an attendance system for the Computer Science Department at RV College of Engineering to track student activities,
+          with an administrator portal for managing students and teachers.
+        </p>
+        <div class="tag-list">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">Laravel</span>
+          <span class="tag">GCP</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>
+      Built by <a href="https://github.com/kart2190" target="_blank" rel="noopener">kart2190</a>
+      &nbsp;·&nbsp;
+      <a href="https://linkedin.com/in/karthik2190/" target="_blank" rel="noopener">LinkedIn</a>
+    </p>
+  </footer>
+
+</body>
+</html>
